@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  --background: #141414;
+  --foreground: #e5e5e5;
+  --netflix-red: #e50914;
+  --netflix-red-hover: #f40612;
+  --netflix-dark: #141414;
+  --netflix-dark-lighter: #181818;
+  --netflix-dark-card: #2f2f2f;
+  --netflix-gray: #808080;
+  --netflix-light-gray: #b3b3b3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-netflix-red: var(--netflix-red);
+  --color-netflix-red-hover: var(--netflix-red-hover);
+  --color-netflix-dark: var(--netflix-dark);
+  --color-netflix-dark-lighter: var(--netflix-dark-lighter);
+  --color-netflix-dark-card: var(--netflix-dark-card);
+  --color-netflix-gray: var(--netflix-gray);
+  --color-netflix-light-gray: var(--netflix-light-gray);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Custom scrollbar for movie rows */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
