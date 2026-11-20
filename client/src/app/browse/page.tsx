@@ -6,8 +6,10 @@ import HeroSection from '@/components/HeroSection';
 import MovieRow from '@/components/MovieRow';
 import Footer from '@/components/Footer';
 import Spinner from '@/components/Spinner';
+import ClassicRow from '@/components/ClassicRow';
+import ContinueWatchingRow from '@/components/ContinueWatchingRow';
 import { api } from '@/lib/api';
-import { FEATURED_GENRES, type Movie, type MovieListResponse } from '@/lib/constants';
+import { CLASSIC_ROWS, FEATURED_GENRES, type Movie, type MovieListResponse } from '@/lib/constants';
 
 interface Row {
   title: string;
@@ -51,8 +53,15 @@ export default function BrowsePage() {
       )}
       {!error && rows.length === 0 && <div className="pt-32"><Spinner /></div>}
       {featured && <HeroSection movie={featured} />}
-      <div className={`relative space-y-6 pb-10 ${featured ? '-mt-24 md:-mt-40' : 'pt-24'}`}>
-        {rows.map((row) => (
+      <div className={`relative space-y-6 pb-10 ${featured ? '-mt-12 md:-mt-20' : 'pt-24'}`}>
+        {rows.length > 0 && <ContinueWatchingRow />}
+        {/* Trending / Popular / Top Rated first, then the free classics, then genres */}
+        {rows.slice(0, 3).map((row) => (
+          <MovieRow key={row.title} title={row.title} movies={row.movies} />
+        ))}
+        {rows.length > 0 &&
+          CLASSIC_ROWS.map((row) => <ClassicRow key={row.category} title={row.title} category={row.category} />)}
+        {rows.slice(3).map((row) => (
           <MovieRow key={row.title} title={row.title} movies={row.movies} />
         ))}
       </div>

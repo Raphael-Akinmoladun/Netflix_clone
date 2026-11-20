@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module.js';
 import { UsersModule } from './users/users.module.js';
 import { MoviesModule } from './movies/movies.module.js';
 import { WatchlistModule } from './watchlist/watchlist.module.js';
+import { ClassicsModule } from './classics/classics.module.js';
 import configuration from './config/configuration.js';
 
 @Module({
@@ -26,6 +27,7 @@ import configuration from './config/configuration.js';
     UsersModule,
     MoviesModule,
     WatchlistModule,
+    ClassicsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

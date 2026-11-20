@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import { TMDB_BACKDROP_W1280, TMDB_POSTER_W500, type MovieDetails } from '@/lib/constants';
@@ -12,6 +13,7 @@ interface MovieModalProps {
 }
 
 export default function MovieModal({ movieId, onClose }: MovieModalProps) {
+  const router = useRouter();
   // The modal is keyed by movieId, so it remounts when a different movie is opened.
   // currentId only changes when clicking a "More Like This" title inside the modal.
   const [currentId, setCurrentId] = useState(movieId);
@@ -134,12 +136,23 @@ export default function MovieModal({ movieId, onClose }: MovieModalProps) {
                 )}
               </div>
 
-              <button
-                onClick={toggleList}
-                className="rounded border border-white/60 px-4 py-2 text-sm font-semibold hover:border-white"
-              >
-                {inList ? '✓ In My List' : '+ My List'}
-              </button>
+              <div className="flex flex-wrap gap-3">
+                <button
+                  onClick={() => {
+                    onClose();
+                    router.push(`/watch/movie/${movie.id}`);
+                  }}
+                  className="flex items-center gap-2 rounded bg-white px-6 py-2 text-sm font-semibold text-black hover:bg-white/75"
+                >
+                  ▶ Play
+                </button>
+                <button
+                  onClick={toggleList}
+                  className="rounded border border-white/60 px-4 py-2 text-sm font-semibold hover:border-white"
+                >
+                  {inList ? '✓ In My List' : '+ My List'}
+                </button>
+              </div>
 
               <p className="text-sm leading-relaxed md:text-base">{movie.overview}</p>
               <p className="text-sm text-netflix-gray">

@@ -2,7 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [{ protocol: "https", hostname: "image.tmdb.org" }],
+    remotePatterns: [
+      { protocol: "https", hostname: "image.tmdb.org" },
+      // Internet Archive thumbnails redirect from archive.org to its storage hosts (ia800...archive.org)
+      { protocol: "https", hostname: "archive.org" },
+      { protocol: "https", hostname: "**.archive.org" },
+    ],
   },
 };
 

@@ -57,6 +57,27 @@ export interface MovieListResponse {
   total_results: number;
 }
 
+// Public-domain films from the Internet Archive (served by /api/classics)
+export const CLASSIC_ROWS = [
+  { category: 'classics', title: 'Classic Movies — Watch Free' },
+  { category: 'horror', title: 'Classic Horror' },
+  { category: 'comedy', title: 'Comedy Classics' },
+  { category: 'scifi', title: 'Retro Sci-Fi' },
+] as const;
+
+export interface Classic {
+  id: string;
+  title: string;
+  year: number | null;
+  posterUrl: string;
+}
+
+export interface ClassicDetails extends Classic {
+  overview: string;
+  videoUrl: string;
+  runtimeMinutes: number | null;
+}
+
 // Watchlist movie (from our DB)
 export interface WatchlistMovie {
   _id: string;
